@@ -1,0 +1,7 @@
+menu "Batlibs Configuration"
+    config MODE_CONTROL_ENABLE
+        bool "Enable mode control"
+        default y
+        help
+            Enable the mode (valve) control feature.
+endmenu

@@ -1,0 +1,122 @@
+dependencies:
+  bblanchon/arduinojson:
+    component_hash: 463812931f99cb7a554d64311288f537b43daaca3eed2427557b907af393447c
+    dependencies: []
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 6.21.5
+  esp-idf-lib/esp_idf_lib_helpers:
+    component_hash: 689853bb8993434f9556af0f2816e808bf77b5d22100144b21f3519993daf237
+    dependencies: []
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    targets:
+    - esp32
+    - esp32c2
+    - esp32c3
+    - esp32c5
+    - esp32c6
+    - esp32c61
+    - esp32h2
+    - esp32p4
+    - esp32s2
+    - esp32s3
+    version: 1.4.0
+  esp-idf-lib/i2cdev:
+    component_hash: 4f3838b2e68ab2b77fd43737139fa97dd0243b46af7b4a04588c67ff6b275ba1
+    dependencies:
+    - name: esp-idf-lib/esp_idf_lib_helpers
+      registry_url: https://components.espressif.com
+      require: private
+      version: '*'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    targets:
+    - esp32
+    - esp32c2
+    - esp32c3
+    - esp32c5
+    - esp32c6
+    - esp32c61
+    - esp32h2
+    - esp32p4
+    - esp32s2
+    - esp32s3
+    version: 2.1.0
+  esp-idf-lib/ina219:
+    component_hash: 87cee7e93d0913cd80f99aee88eadf2cba769b4504cfea19af0a13327a7038e1
+    dependencies:
+    - name: esp-idf-lib/esp_idf_lib_helpers
+      registry_url: https://components.espressif.com
+      require: private
+      version: '*'
+    - name: esp-idf-lib/i2cdev
+      registry_url: https://components.espressif.com
+      require: private
+      version: '*'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    targets:
+    - esp32
+    - esp32c2
+    - esp32c3
+    - esp32c5
+    - esp32c6
+    - esp32c61
+    - esp32h2
+    - esp32p4
+    - esp32s2
+    - esp32s3
+    version: 1.0.7
+  espressif/ds18b20:
+    component_hash: 9792f38a20eb2fe7435cba349e3b4b7085381f05400233aacd849ced69e2207f
+    dependencies:
+    - name: espressif/onewire_bus
+      registry_url: https://components.espressif.com
+      require: private
+      version: ^1.0.0
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 0.2.0
+  espressif/onewire_bus:
+    component_hash: 11729fd9a5de80225177a61e9cd77de91683b8ec300e83710d5327b666dbe884
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 1.0.4
+  idf:
+    source:
+      type: idf
+    version: 5.5.0
+  thingsboard/thingsboard:
+    component_hash: 5ea11f90189806ed14e15c933511929278b0fc9838fd7a9a119ad3c33ade061d
+    dependencies:
+    - name: bblanchon/arduinojson
+      registry_url: https://components.espressif.com
+      require: private
+      version: ^6.21.5
+    - name: idf
+      require: private
+      version: '*'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 0.15.0
+direct_dependencies:
+- esp-idf-lib/esp_idf_lib_helpers
+- esp-idf-lib/i2cdev
+- esp-idf-lib/ina219
+- espressif/ds18b20
+- thingsboard/thingsboard
+manifest_hash: e0494314defa01501f1eea40c80fb3f7a438cc5eceaa42987ba527419fea0f37
+target: esp32
+version: 2.0.0

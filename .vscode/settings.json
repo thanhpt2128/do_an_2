@@ -1,0 +1,9 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "files.associations": {
+    "esp_log.h": "c"
+  },
+  "idf.portWin": "COM6",
+  "idf.flashType": "UART",
+  "idf.currentSetup": "D:/LEARNING_AREA/ESP32_PROJ/esp/Espressif/frameworks/esp-idf-v5.5/"
+}

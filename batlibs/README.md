@@ -1,0 +1,1 @@
+Thư viện batlibs chứa các chức năng battery_cc và mode_control (điều khiển đóng/mở xả). Sử dụng mode_open(), mode_close() từ mode_control.h.
