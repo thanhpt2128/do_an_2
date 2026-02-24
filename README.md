@@ -40,4 +40,4 @@ Hệ thống quản lý và giám sát pin lithium-ion với kết nối IoT qua
 - `managed_components/`: Thư viện phụ thuộc (INA219, DS18B20, ThingsBoard, ArduinoJSON)
 
 ## Tài liệu
-
+- [📄 Báo cáo đồ án](./PhamTruongThanh_20222675_doan2.pdf)
