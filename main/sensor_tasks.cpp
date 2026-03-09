@@ -25,20 +25,16 @@ void ina219_soc_task(void *pvParameters)
     ESP_LOGI(TAG, "[CORE1] INA219+SOC task started");
     vTaskDelay(pdMS_TO_TICKS(5000));
     
-    // Load SOH từ NVS
     bsoh_load_from_nvs(ctx->soc);
     
-    // Đọc điện áp ban đầu để ước lượng SOC
     ESP_ERROR_CHECK(ina219_get_bus_voltage(&ctx->dev, &bus_voltage));
     ESP_LOGI(TAG, "Initial voltage: %.04f V", bus_voltage);
     
-    // Ước lượng SOC từ OCV ban đầu
     bsoc_estimate_soc_from_ocv(ctx->soc, bus_voltage);
     ctx->soc->capacity_est = ctx->soc->soc_cc * ctx->soc->rated_capacity_Ah * ctx->soc->soh;
     
     while (1)
     {
-        // Đọc dữ liệu INA219
         ESP_ERROR_CHECK(ina219_get_bus_voltage(&ctx->dev, &bus_voltage));
         ESP_ERROR_CHECK(ina219_get_shunt_voltage(&ctx->dev, &shunt_voltage));
         ESP_ERROR_CHECK(ina219_get_current(&ctx->dev, &current));
@@ -48,12 +44,10 @@ void ina219_soc_task(void *pvParameters)
             current = 0.0f;
         }
         
-        // Cập nhật SOC
         bsoc_feed_sample(ctx->soc, bus_voltage, current);
         float soc_percent = bsoc_get_soc_percent(ctx->soc);
         float soh_percent = bsoc_get_soh_percent(ctx->soc);
         
-        // Lấy nhiệt độ hiện tại từ queue (nếu có)
         sensor_data_t data = {0};
         xQueuePeek(g_sensor_queue, &data, 0);  // Lấy temperature cũ (nếu có)
         
@@ -101,11 +95,9 @@ void ds18b20_task(void *pvParameters)
         
         esp_err_t err = onewire_device_iter_get_next(iter_handle, &ds18b20_device);
         
-        // Giải phóng iterator
         ESP_ERROR_CHECK(onewire_del_device_iter(iter_handle));
         
         if (err == ESP_OK) {
-            // Tìm thấy thiết bị, tạo handle
             ds18b20_config_t ds18b20_config = {};
             esp_err_t create_err = ds18b20_new_device_from_enumeration(&ds18b20_device, &ds18b20_config, &ds18b20_handle);
             
