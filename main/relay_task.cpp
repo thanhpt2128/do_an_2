@@ -78,7 +78,7 @@ void relay_control_task(void *pvParameters)
                     last_ocv_update_ms = 0;
                 }
             }
-            // Kiểm tra nhiệt độ quá cao hoặc quá thấp
+            // Kiểm tra nhiệt độ 
             else if (temperature > MAX_TEMPERATURE) {
                 if (last_mode != MODE_OPEN_CIRCUIT) {
                     final_mode = MODE_OPEN_CIRCUIT;
@@ -123,7 +123,7 @@ void relay_control_task(void *pvParameters)
                         low_current_start_ms = esp_timer_get_time() / 1000;
                     } else {
                         int64_t duration_ms = (esp_timer_get_time() / 1000) - low_current_start_ms;
-                        if (duration_ms >= 30000) { // 30 giây
+                        if (duration_ms >= 30000) { 
                             final_mode = MODE_OPEN_CIRCUIT;
                             last_mode = MODE_OPEN_CIRCUIT;
                             low_current_start_ms = 0;
@@ -154,7 +154,6 @@ void relay_control_task(void *pvParameters)
                     int64_t now_ms = esp_timer_get_time() / 1000;
                     int64_t open_duration_ms = now_ms - open_circuit_start_ms;
                     
-                    // Cập nhật định kỳ mỗi 1 tiếng (3600000ms)
                     if (open_duration_ms >= 3600000) {
                         int64_t time_since_last_update = now_ms - last_ocv_update_ms;
                         
