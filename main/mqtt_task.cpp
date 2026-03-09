@@ -15,14 +15,12 @@ extern "C" {
 #include "mode_control.h"
 }
 
-// ThingsBoard
 #include <Espressif_MQTT_Client.h>
 #include <ThingsBoard.h>
 #include <Server_Side_RPC.h>
 
 static const char *TAG = "MQTT";
 
-// ThingsBoard MQTT Client
 constexpr uint16_t MAX_MESSAGE_SIZE = 256U;
 constexpr uint8_t MAX_RPC_SUBSCRIPTIONS = 3U;
 constexpr uint8_t MAX_RPC_RESPONSE = 5U;
@@ -52,16 +50,13 @@ constexpr char MODE_OPEN[] = "open";
 constexpr char CTRL_AUTO_STR[] = "auto";
 constexpr char CTRL_MANUAL_STR[] = "manual";
 
-// RPC subscription flag
 static bool g_rpc_subscribed = false;
 
-// Track last sent mode to avoid redundant updates
 static power_mode_t g_last_sent_mode = MODE_OPEN_CIRCUIT;
 static control_src_t g_last_sent_ctrl_src = CTRL_AUTO;
 
 // ============ RPC Callback Functions ============
 
-/// @brief Callback function to handle mode change RPC from ThingsBoard
 void processSetMode(const JsonVariantConst &data, JsonDocument &response) {
     if (!data.containsKey(RPC_MODE_KEY)) {
         ESP_LOGW(TAG, "RPC setMode: missing 'mode' parameter");
@@ -261,10 +256,8 @@ void mqtt_task(void *pvParameters)
             }
         }
         
-        // Send mode attributes (will only send if changed)
         sendModeAttributes();
         
-        // Process MQTT messages
         tb.loop();
         
         vTaskDelay(pdMS_TO_TICKS(5000));
